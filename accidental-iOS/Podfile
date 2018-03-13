@@ -1,0 +1,12 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '11.0'
+
+target 'accidental-iOS' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for accidental-iOS
+pod 'Material', '~> 2.0'
+pod 'Alamofire', '~> 4.2.0'
+pod 'SwiftyJSON'
+end

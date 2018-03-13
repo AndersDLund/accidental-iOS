@@ -1,0 +1,6 @@
+framework module Pods_accidental_iOS {
+  umbrella header "Pods-accidental-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
