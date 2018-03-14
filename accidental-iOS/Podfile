@@ -7,6 +7,8 @@ target 'accidental-iOS' do
 
   # Pods for accidental-iOS
 pod 'Material', '~> 2.0'
-pod 'Alamofire', '~> 4.2.0'
+pod 'Alamofire', '~> 4.6.0'
+pod 'Alamofire-SwiftyJSON', '~> 3.0.0'
 pod 'SwiftyJSON'
+
 end

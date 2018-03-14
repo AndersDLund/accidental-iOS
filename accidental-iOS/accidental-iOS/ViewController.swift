@@ -13,7 +13,15 @@ import SwiftyJSON
 import Alamofire
 
 class ViewController: UIViewController {
-
+    @IBAction func signupButton(_ sender: Any) {
+        print("signup")
+        self.performSegue(withIdentifier: "signupSegue", sender: sender)
+    }
+    @IBAction func loginButton(_ sender: Any) {
+        print("login")
+        self.performSegue(withIdentifier: "loginSegue", sender: sender)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,6 +32,6 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
 }
+
 
