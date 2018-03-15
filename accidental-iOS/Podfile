@@ -10,5 +10,5 @@ pod 'Material', '~> 2.0'
 pod 'Alamofire', '~> 4.6.0'
 pod 'Alamofire-SwiftyJSON', '~> 3.0.0'
 pod 'SwiftyJSON'
-
+pod 'FoldingCell'
 end
