@@ -72,7 +72,8 @@ class LoginViewController: UIViewController {
                             let userEmail = jsonData["email"].stringValue
                             let fullName = jsonData["full_name"].string ?? "Anders Lund"
                             let userOrg = jsonData["organization"].string ?? "Galvanize"
-                            UserManager.manager.currentUser = User(id: userId, email: userEmail, fullName: fullName, organization: userOrg)
+                            let user = User(id: userId, email: userEmail, fullName: fullName, organization: userOrg)
+                            UserManager.manager.currentUser = user
                             self.navigationController?.dismiss(animated: true, completion: nil)
                         }
                         

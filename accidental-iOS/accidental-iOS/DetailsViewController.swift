@@ -9,17 +9,21 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
-  
-    @IBOutlet weak var modelLabel: UILabel!
     
-    @IBOutlet weak var makeLabel: UILabel!
+    
+    @IBOutlet weak var carImage: UIImageView!
+    
+    @IBOutlet weak var carLabel: UILabel!
     var car:car?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeLabel.text = car?.make.capitalized
-        modelLabel.text = car?.model.capitalized
+        let url = URL(string: (car?.image)!)
+        let data = try? Data(contentsOf: url!)
+        print(url!)
+        carLabel.text = "\(car!.make.uppercased()) \(car!.model.capitalized.uppercased())"
         
+        carImage.image = UIImage(data:data!)
     }
 
 }

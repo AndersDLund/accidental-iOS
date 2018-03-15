@@ -12,10 +12,12 @@ class car {
     var make: String
     var model: String
     var swag: Int
+    var image: String
     
-    init(make: String, model: String, swag: Int){
+    init(make: String, model: String, swag: Int, image: String){
         self.make = make
         self.model = model
         self.swag = swag
+        self.image = image
     }
 }
