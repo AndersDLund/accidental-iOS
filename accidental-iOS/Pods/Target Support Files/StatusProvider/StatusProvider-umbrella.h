@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double FoldingCellVersionNumber;
-FOUNDATION_EXPORT const unsigned char FoldingCellVersionString[];
+FOUNDATION_EXPORT double StatusProviderVersionNumber;
+FOUNDATION_EXPORT const unsigned char StatusProviderVersionString[];
 

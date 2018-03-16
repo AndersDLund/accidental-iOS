@@ -11,8 +11,9 @@ import Material
 import Motion
 import SwiftyJSON
 import Alamofire
+import StatusProvider
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, StatusController {
     fileprivate var emailField: ErrorTextField!
     fileprivate var passwordField: TextField!
     var responseData : JSON?
@@ -36,6 +37,7 @@ class LoginViewController: UIViewController {
         preparePasswordField()
         prepareEmailField()
 //        prepareResignResponderButton()
+        
     }
     
     /// Prepares the resign responder button.

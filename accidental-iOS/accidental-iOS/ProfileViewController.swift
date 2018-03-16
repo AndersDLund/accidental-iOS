@@ -12,13 +12,10 @@ import Motion
 import SwiftyJSON
 import Alamofire
 import Alamofire_SwiftyJSON
+import StatusProvider
 
 
-    
-
-
-
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StatusController {
     
     
     var sentData : JSON?
@@ -41,6 +38,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         
+        title = "Loading"
+        
+        var status = Status(isLoading: true, description: "Loading…")
+        show(status:status)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,11 +51,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
+        let rect = CGRect(origin: CGPoint(x: 12,y :12), size: CGSize(width: 300, height: 100))
         let url = URL(string: cars[indexPath.row].image)
         let data = try? Data(contentsOf: url!)
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell")
+        let imageView = UIImageView(frame: rect)
+        let image = UIImage(data:data!)
+        imageView.image = image
         cell?.textLabel?.text = "\(cars[indexPath.row].model.uppercased()), \(cars[indexPath.row].make.uppercased())"
-        cell?.backgroundView? = UIImageView(image: UIImage(data:data!)!)
+        cell?.backgroundView = UIView()
+//        cell?.backgroundView!.addSubview(imageView)
         return cell!
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -69,18 +76,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let user = UserManager.manager.currentUser{
-            print(user, "user in profile view")
             Alamofire.request("http://:3000/carGet/\(user.id!)", method: .get, encoding: JSONEncoding.default).responseSwiftyJSON
                 {response in
                     switch response.result{
                     case .success:
                         self.cars.removeAll()
-                        print(response.result.value!, "return value from profile")
                         let data = response.result.value!
                         for i in 0..<data.count{
-                            self.cars.append(car(make: data[i]["make"].string!, model: data[i]["model"].string!, swag: 6, image: data[i]["image"].string!))
-                            print(data[i]["make"].string!)
-                            print(self.cars)
+                            self.cars.append(car(plate: data[i]["plate"].string!, id: data[i]["id"].int!, make: data[i]["make"].string!, model: data[i]["model"].string!, swag: 6, image: data[i]["image"].string!))
+                            print(data[i], "looking for the right id!!!!!!!")
+                            self.hideStatus()
                         }
                         self.tableView.reloadData()
                     case .failure:

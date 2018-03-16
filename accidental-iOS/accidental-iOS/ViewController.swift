@@ -12,7 +12,13 @@ import Motion
 import SwiftyJSON
 import Alamofire
 
+
+
 class ViewController: UIViewController {
+    
+
+    
+    
     @IBAction func signupButton(_ sender: Any) {
         print("signup")
         self.performSegue(withIdentifier: "signupSegue", sender: sender)
@@ -25,6 +31,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+       
+    }
+    
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

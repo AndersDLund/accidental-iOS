@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		95420570205B613B00106C27 /* damage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542056F205B613B00106C27 /* damage.swift */; };
 		95A0DD4220584DB7001E6B65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A0DD4120584DB7001E6B65 /* AppDelegate.swift */; };
 		95A0DD4420584DB7001E6B65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A0DD4320584DB7001E6B65 /* ViewController.swift */; };
 		95A0DD4720584DB7001E6B65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A0DD4520584DB7001E6B65 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		40BC7A7CDC39DF71CA2535BB /* Pods-accidental-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-accidental-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-accidental-iOS/Pods-accidental-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		621720D983E9B0A696915F93 /* Pods_accidental_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_accidental_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9542056F205B613B00106C27 /* damage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = damage.swift; sourceTree = "<group>"; };
 		95A0DD3E20584DB7001E6B65 /* accidental-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "accidental-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		95A0DD4120584DB7001E6B65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95A0DD4320584DB7001E6B65 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				95A0DD6320596F61001E6B65 /* API */,
 				95A0DD4120584DB7001E6B65 /* AppDelegate.swift */,
 				95A0DD6620597EE6001E6B65 /* ProfileViewController.swift */,
+				95EBCD6A205A282500690AB2 /* DetailsViewController.swift */,
 				95A0DD4320584DB7001E6B65 /* ViewController.swift */,
 				95A0DD6120587C5E001E6B65 /* LoginViewController.swift */,
 				95A0DD5F20585C81001E6B65 /* SignupViewController.swift */,
@@ -95,7 +98,6 @@
 				95A0DD4D20584DB7001E6B65 /* LaunchScreen.storyboard */,
 				95A0DD5020584DB7001E6B65 /* Info.plist */,
 				95A0DD4820584DB7001E6B65 /* accidental_iOS.xcdatamodeld */,
-				95EBCD6A205A282500690AB2 /* DetailsViewController.swift */,
 			);
 			path = "accidental-iOS";
 			sourceTree = "<group>";
@@ -113,6 +115,7 @@
 			children = (
 				95A0DD6E2059B619001E6B65 /* User.swift */,
 				95EBCD66205A20CE00690AB2 /* car.swift */,
+				9542056F205B613B00106C27 /* damage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,18 +244,18 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-accidental-iOS/Pods-accidental-iOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-SwiftyJSON/Alamofire_SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
+				"${BUILT_PRODUCTS_DIR}/StatusProvider/StatusProvider.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StatusProvider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +291,7 @@
 				95EBCD6B205A282500690AB2 /* DetailsViewController.swift in Sources */,
 				95A0DD6220587C5E001E6B65 /* LoginViewController.swift in Sources */,
 				95A0DD6720597EE6001E6B65 /* ProfileViewController.swift in Sources */,
+				95420570205B613B00106C27 /* damage.swift in Sources */,
 				95A0DD6F2059B619001E6B65 /* User.swift in Sources */,
 				95A0DD6520596F8F001E6B65 /* ApiManager.swift in Sources */,
 				95A0DD6D2059B5C2001E6B65 /* UserManager.swift in Sources */,

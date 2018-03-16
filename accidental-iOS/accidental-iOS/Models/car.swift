@@ -9,12 +9,16 @@
 import Foundation
 
 class car {
+    var plate: String
+    var id: Int
     var make: String
     var model: String
     var swag: Int
     var image: String
     
-    init(make: String, model: String, swag: Int, image: String){
+    init(plate:String, id:Int, make: String, model: String, swag: Int, image: String){
+        self.plate = plate
+        self.id = id
         self.make = make
         self.model = model
         self.swag = swag
