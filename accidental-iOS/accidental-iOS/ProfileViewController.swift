@@ -21,7 +21,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var sentData : JSON?
     
     
-  
+    @IBAction func registerButtonClicked(_ sender: Any) {
+        self.performSegue(withIdentifier: "profileRegisterSegue", sender: sender)
+    }
+    
     
     @IBOutlet weak var tableView: UITableView!
     

@@ -11,5 +11,6 @@ pod 'Alamofire', '~> 4.6.0'
 pod 'Alamofire-SwiftyJSON', '~> 3.0.0'
 pod 'SwiftyJSON'
 pod 'StatusProvider'
-
+pod 'LTMorphingLabel'
+pod "TOMSMorphingLabel", "~> 0.5"
 end
