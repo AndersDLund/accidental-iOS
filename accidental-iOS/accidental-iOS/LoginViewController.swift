@@ -62,7 +62,7 @@ class LoginViewController: UIViewController, StatusController {
             
             let params = ["email": emailField.text, "password": passwordField.text]
             
-            Alamofire.request("http://localhost:3000/login", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
+            Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/login", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                 {response in
                     print(response)
                     switch response.result {
@@ -99,6 +99,8 @@ extension LoginViewController {
         emailField.placeholder = "Email"
         emailField.detail = "Error, incorrect email"
         emailField.isClearIconButtonEnabled = true
+        emailField.delegate = self
+        
         //        emailField.delegate = self
         emailField.isPlaceholderUppercasedWhenEditing = true
 //        emailField.placeholderAnimation = .hidden
@@ -119,11 +121,12 @@ extension LoginViewController {
     }
     
     fileprivate func preparePasswordField() {
-        passwordField = TextField()
+        passwordField = ErrorTextField()
         passwordField.placeholder = "Password"
         passwordField.detail = "At least 8 characters"
         passwordField.clearButtonMode = .whileEditing
         passwordField.isVisibilityIconButtonEnabled = true
+        passwordField.delegate = self
         
         // Setting the visibilityIconButton color.
         passwordField.visibilityIconButton?.tintColor = Color.green.base.withAlphaComponent(passwordField.isSecureTextEntry ? 0.38 : 0.54)
@@ -132,3 +135,19 @@ extension LoginViewController {
     }
 }
 
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case emailField:
+            emailField.resignFirstResponder()
+            passwordField.becomeFirstResponder()
+        case passwordField:
+            passwordField.resignFirstResponder()
+            self.view.endEditing(true)
+        default:
+            print("How in the hell did we reach this case?")
+        }
+        
+        return true
+    }
+}

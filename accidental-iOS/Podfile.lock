@@ -11,6 +11,7 @@ PODS:
   - Motion (1.3.5):
     - Motion/Core (= 1.3.5)
   - Motion/Core (1.3.5)
+  - PickerView (0.3.3)
   - StatusProvider (1.2.7)
   - SwiftyJSON (4.0.0)
   - TOMSMorphingLabel (0.5.1)
@@ -20,6 +21,7 @@ DEPENDENCIES:
   - Alamofire-SwiftyJSON (~> 3.0.0)
   - LTMorphingLabel
   - Material (~> 2.0)
+  - PickerView
   - StatusProvider
   - SwiftyJSON
   - TOMSMorphingLabel (~> 0.5)
@@ -30,10 +32,11 @@ SPEC CHECKSUMS:
   LTMorphingLabel: bdb51d4682e9822da89da6f567bd8aa456fd6650
   Material: ef704dcc1bced32ab7c91ece2ba734da557e3f36
   Motion: 9f74d115d7f72bb5380a8e3cde2f8a1fc898ac36
+  PickerView: a6703d2f7cb1fafc8a3aef4af255a5acd320ddff
   StatusProvider: e75bc9f63b935f5eec6fe49447b8e9ebbc871a87
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
 
-PODFILE CHECKSUM: 0bc45a2edc48dda21589a8fa3ae557e4d7e894ea
+PODFILE CHECKSUM: aeb00627228555b511e8b86fa655d24ab4d90ea5
 
 COCOAPODS: 1.4.0

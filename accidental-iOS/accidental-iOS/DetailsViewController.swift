@@ -2,7 +2,7 @@
 //  DetailsViewController.swift
 //  accidental-iOS
 //
-//  Created by Anders Lund on 3/14/18.
+//  Created by Anders Lund on 3/19/18.
 //  Copyright © 2018 accidental. All rights reserved.
 //
 
@@ -18,20 +18,23 @@ import StatusProvider
 class DetailsViewController: UIViewController, StatusController {
     var damages = [damage]()
     
+    @IBOutlet weak var carImage: UIImageView!
+    @IBOutlet weak var carLabel: UILabel!
+    @IBOutlet weak var damageReportLabel: TOMSMorphingLabel!
+
     @IBOutlet weak var scratchesLabel: TOMSMorphingLabel!
     @IBOutlet weak var dentsLabel: TOMSMorphingLabel!
     @IBOutlet weak var chipsLabel: TOMSMorphingLabel!
     @IBOutlet weak var curbRashLabel: TOMSMorphingLabel!
-    @IBOutlet weak var damageReportLabel: TOMSMorphingLabel!
+    
     
     var scratchCount = 0 //1
     var dentCount = 0 //2
     var chipCount = 0 //3
     var curbCount = 0 //4
     
-    @IBOutlet weak var carImage: UIImageView!
+
     
-    @IBOutlet weak var carLabel: UILabel!
     var car:car?
     
     override func viewDidLoad() {
@@ -39,14 +42,9 @@ class DetailsViewController: UIViewController, StatusController {
         let url = URL(string: (car?.image)!)
         let data = try? Data(contentsOf: url!)
         print(url!)
-        carLabel.text = "\(car!.make.uppercased()) \(car!.model.capitalized.uppercased())"
+        carLabel.text = "\(car!.make.uppercased()) \(car!.model.uppercased())"
         
         carImage.image = UIImage(data:data!)
-        
-        
-        
-      
-        
         
         
         self.curbRashLabel.text = "Curb Rash: \(0)"
@@ -54,17 +52,17 @@ class DetailsViewController: UIViewController, StatusController {
         self.dentsLabel.text = "Dents: \(0)"
         self.scratchesLabel.text = "scratches: \(0)"
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         let status = Status(title: "🙅‍♀️No Damage Recorded🙅‍♀️", description: "Keep up the Good Work!", image: UIImage(named: "placeholder")) {
             self.hideStatus()
         }
+    
         
-        
-            print(self.car!.id, "the car!")
-        Alamofire.request("http://:3000/damageGet/\(car!.id)", method: .get, encoding: JSONEncoding.default).responseSwiftyJSON
+        print(self.car!.id, "the car!")
+        Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageGet/\(car!.id)", method: .get, encoding: JSONEncoding.default).responseSwiftyJSON
             {response in
                 print(response, "response from details!!!!!")
                 switch response.result{
@@ -107,8 +105,9 @@ class DetailsViewController: UIViewController, StatusController {
                     self.show(status:status)
                 }
         }
-        
+    
         
     }
-
+    
 }
+

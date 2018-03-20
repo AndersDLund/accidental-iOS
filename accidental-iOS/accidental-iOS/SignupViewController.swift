@@ -12,7 +12,7 @@ import Motion
 import SwiftyJSON
 import Alamofire
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController  {
     fileprivate var emailField: ErrorTextField!
     fileprivate var passwordField: TextField!
     fileprivate var nameField: TextField!
@@ -51,7 +51,7 @@ class SignupViewController: UIViewController {
         if emailField.text!.count > 5 && passwordField.text!.count > 8 && nameField.text!.count > 0{
             let params = ["full_name": nameField.text, "email": emailField.text, "organization": organizationField.text, "password": passwordField.text]
             
-            Alamofire.request("http://localhost:3000/signup", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
+            Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/signup", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                 {response in
                     print(response)
                     // Take response and pass data to user object.
@@ -75,12 +75,13 @@ extension SignupViewController {
    
     
     fileprivate func prepareFullName(){
-        nameField = ErrorTextField()
+        nameField = TextField()
         nameField.placeholder = "Name"
         
         nameField.isClearIconButtonEnabled = true
         nameField.delegate = self
         nameField.isPlaceholderUppercasedWhenEditing = true
+        nameField.delegate = self
         
         view.layout(nameField).left(20).right(20).top(100)
     }
@@ -93,6 +94,7 @@ extension SignupViewController {
         emailField.isClearIconButtonEnabled = true
         emailField.delegate = self
         emailField.isPlaceholderUppercasedWhenEditing = true
+        emailField.delegate = self
         
         // Set the colors for the emailField, different from the defaults.
 //                emailField.placeholderNormalColor = Color.amber.darken4
@@ -111,6 +113,7 @@ extension SignupViewController {
         organizationField.isClearIconButtonEnabled = true
         organizationField.delegate = self
         organizationField.isPlaceholderUppercasedWhenEditing = true
+        organizationField.delegate = self
         
         view.layout(organizationField).left(20).right(20).top(300)
     }
@@ -121,6 +124,8 @@ extension SignupViewController {
         passwordField.detail = "At least 8 characters"
         passwordField.clearButtonMode = .whileEditing
         passwordField.isVisibilityIconButtonEnabled = true
+        passwordField.delegate = self
+        
         
         // Setting the visibilityIconButton color.
         passwordField.visibilityIconButton?.tintColor = Color.green.base.withAlphaComponent(passwordField.isSecureTextEntry ? 0.38 : 0.54)
@@ -145,3 +150,6 @@ extension SignupViewController: TextFieldDelegate {
         return true
     }
 }
+
+
+

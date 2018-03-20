@@ -78,8 +78,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let user = UserManager.manager.currentUser{
-            Alamofire.request("http://:3000/carGet/\(user.id!)", method: .get, encoding: JSONEncoding.default).responseSwiftyJSON
+    
+        if let user = UserManager.manager.currentUser {
+            Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/carGet/\(user.id!)", method: .get, encoding: JSONEncoding.default).responseSwiftyJSON
                 {response in
                     switch response.result{
                     case .success:

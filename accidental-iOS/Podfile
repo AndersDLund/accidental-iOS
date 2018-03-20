@@ -13,4 +13,5 @@ pod 'SwiftyJSON'
 pod 'StatusProvider'
 pod 'LTMorphingLabel'
 pod "TOMSMorphingLabel", "~> 0.5"
+pod "PickerView"
 end
