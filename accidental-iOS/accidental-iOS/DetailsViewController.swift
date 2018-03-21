@@ -18,6 +18,8 @@ import StatusProvider
 class DetailsViewController: UIViewController, StatusController {
     var damages = [damage]()
     
+    
+    
     @IBOutlet weak var carImage: UIImageView!
     @IBOutlet weak var carLabel: UILabel!
     @IBOutlet weak var damageReportLabel: TOMSMorphingLabel!
@@ -36,6 +38,12 @@ class DetailsViewController: UIViewController, StatusController {
 
     
     var car:car?
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? InspectViewController {
+            destination.car = car
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,8 +69,8 @@ class DetailsViewController: UIViewController, StatusController {
         }
     
         
-        print(self.car!.id, "the car!")
-        Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageGet/\(car!.id)", method: .get, encoding: JSONEncoding.default).responseSwiftyJSON
+        print(self.car!, "the car!")
+        Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageGet/\(car!.car_id)", method: .get, encoding: JSONEncoding.default).responseSwiftyJSON
             {response in
                 print(response, "response from details!!!!!")
                 switch response.result{

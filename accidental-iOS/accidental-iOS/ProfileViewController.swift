@@ -87,7 +87,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         self.cars.removeAll()
                         let data = response.result.value!
                         for i in 0..<data.count{
-                            self.cars.append(car(plate: data[i]["plate"].string!, id: data[i]["id"].int!, make: data[i]["make"].string!, model: data[i]["model"].string!, swag: 6, image: data[i]["image"].string!))
+                            self.cars.append(car(plate: data[i]["plate"].string!, car_id: data[i]["car_id"].int!, make: data[i]["make"].string!, model: data[i]["model"].string!, image: data[i]["image"].string!, user_id: data[i]["user_id"].int!))
                             print(data[i], "looking for the right id!!!!!!!")
                             self.hideStatus()
                         }

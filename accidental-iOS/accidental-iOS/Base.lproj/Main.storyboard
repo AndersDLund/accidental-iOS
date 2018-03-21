@@ -117,7 +117,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="cCv-F3-mRB" kind="show" id="ftr-NB-vDg"/>
+                                    <segue destination="cCv-F3-mRB" kind="show" identifier="detailsInspectSegue" id="ftr-NB-vDg"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L0Y-bW-QcJ">

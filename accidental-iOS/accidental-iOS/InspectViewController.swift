@@ -11,15 +11,21 @@ import Material
 import Motion
 import Vision
 import AVKit
+import Alamofire
+import SwiftyJSON
+import Alamofire_SwiftyJSON
 
 
 class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     var damageType = "damage type"
     var representedDamage = "damage type"
+    var car:car?
+    var user = UserManager.manager.currentUser
     @IBOutlet weak var recordButton: RaisedButton!
     
     
     @objc func handleGestureLong(press: UILongPressGestureRecognizer) {
+        
         if press.state == .began {
           print(damageType, "start")
            representedDamage = damageType
@@ -27,14 +33,30 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
         if press.state == .ended{
             print(representedDamage, "end")
             switch representedDamage {
-            case "dents":
-                print("dent BITCH")
-            case "chips":
-                print("chip BITCH")
             case "scratches":
-                print("scratch BITCH")
+                let params = ["damage_type_id": 1]
+                Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageNew/\(car!.car_id)", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
+                    {response in
+                        print(response.result)
+                }
+            case "chips":
+                let params = ["damage_type_id": 2]
+                Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageNew/\(car!.car_id)", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
+                    {response in
+                        print(response.result)
+                }
+            case "dents":
+                 let params = ["damage_type_id": 3]
+                Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageNew/\(car!.car_id)", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
+                    {response in
+                        print(response.result)
+                }
             case "curbRash":
-                print("curb BITCH")
+                 let params = ["damage_type_id": 4]
+                Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageNew/\(car!.car_id)", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
+                    {response in
+                        print(response.result)
+                }
             default:
                 print("how did this even happen")
             }
@@ -52,7 +74,8 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
     
     let identifierLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .white
+//        label.backgroundColor = .white
+        label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -60,7 +83,8 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(car!.user_id, "wooooooooooo")
+        print(user!.fullName, "current user")
         let longPressGestureRecogn = UILongPressGestureRecognizer(target: self, action: #selector(handleGestureLong(press:)))
         let tapPressGestureRecogn = UITapGestureRecognizer(target: self, action: #selector(handleTap(press:)))
         longPressGestureRecogn.minimumPressDuration = 3.0
@@ -124,9 +148,23 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
 //            print(firstObservation.identifier, firstObservation.confidence)
             
             DispatchQueue.main.async {
-                if firstObservation.confidence * 100 > 60{
-                self.identifierLabel.text = "\(firstObservation.identifier) \(firstObservation.confidence * 100)"
-                self.damageType = firstObservation.identifier
+                if firstObservation.confidence * 100 > 75{
+                    if firstObservation.identifier == "dents"{
+                        self.identifierLabel.text = "Dent \(floor(firstObservation.confidence * 100))%"
+                        self.damageType = firstObservation.identifier
+                    }
+                    else if firstObservation.identifier == "scratches"{
+                        self.identifierLabel.text = "Scratch \(floor(firstObservation.confidence * 100))%"
+                        self.damageType = firstObservation.identifier
+                    }
+                    else if firstObservation.identifier == "chips"{
+                        self.identifierLabel.text = "Chip \(floor(firstObservation.confidence * 100))%"
+                        self.damageType = firstObservation.identifier
+                    }
+                    else if firstObservation.identifier == "curbRash"{
+                        self.identifierLabel.text = "Curb Rash \(floor(firstObservation.confidence * 100))%"
+                        self.damageType = firstObservation.identifier
+                    }
             }
         }
             
