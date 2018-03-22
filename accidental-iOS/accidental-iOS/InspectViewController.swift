@@ -40,13 +40,13 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
                         print(response.result)
                 }
             case "chips":
-                let params = ["damage_type_id": 2]
+                let params = ["damage_type_id": 3]
                 Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageNew/\(car!.car_id)", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                     {response in
                         print(response.result)
                 }
             case "dents":
-                 let params = ["damage_type_id": 3]
+                 let params = ["damage_type_id": 2]
                 Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageNew/\(car!.car_id)", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                     {response in
                         print(response.result)

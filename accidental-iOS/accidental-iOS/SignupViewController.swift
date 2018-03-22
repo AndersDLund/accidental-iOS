@@ -54,12 +54,23 @@ class SignupViewController: UIViewController  {
             Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/signup", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                 {response in
                     print(response)
+                    switch response.result {
+                    case .success:
+                        print("nice")
+                        self.navigationController?.dismiss(animated: true, completion: nil)
+                    case .failure:
+                        print("boo")
+                    }
+                    
+                    
+                    
+                    
                     // Take response and pass data to user object.
                     // For now, just set UserDefaults.
                     
                     
 
-                    self.navigationController?.dismiss(animated: true, completion: nil)
+//                    self.navigationController?.dismiss(animated: true, completion: nil)
             }
         } else {
         let controller = UIAlertController(title: "Hold Up", message: "Please fill out the required infromation", preferredStyle: .alert)
@@ -145,11 +156,16 @@ extension SignupViewController: TextFieldDelegate {
         return true
     }
     
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        (textField as? ErrorTextField)?.isErrorRevealed = true
+//        return true
+//    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        (textField as? ErrorTextField)?.isErrorRevealed = true
-        return true
+        self.view.endEditing(true)
+        return false
     }
 }
+
 
 
 

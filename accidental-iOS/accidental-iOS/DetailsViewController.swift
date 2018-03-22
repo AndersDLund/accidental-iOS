@@ -83,7 +83,7 @@ class DetailsViewController: UIViewController, StatusController {
                         case 1:
                             self.scratchCount += 1
                             print(self.scratchCount, "scratches")
-                            self.scratchesLabel.text = "scratches: \(self.scratchCount)"
+                            self.scratchesLabel.text = "Scratches: \(self.scratchCount)"
                         case 2:
                             self.dentCount += 1
                             print(self.dentCount, "dents")
@@ -94,7 +94,7 @@ class DetailsViewController: UIViewController, StatusController {
                             self.chipsLabel.text = "Chips: \(self.chipCount)"
                         case 4:
                             self.curbCount += 1
-                            print(self.curbCount)
+                            print(self.curbCount, "curb rash")
                             self.curbRashLabel.text = "Curb Rash: \(self.curbCount)"
                         default:
                             self.curbRashLabel.text = "Curb Rash: \(0)"

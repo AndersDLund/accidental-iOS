@@ -18,13 +18,13 @@ class LoginViewController: UIViewController, StatusController {
     fileprivate var passwordField: TextField!
     var responseData : JSON?
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "loginProfileSegue" {
-            if let destinationViewController = segue.destination as? ProfileViewController {
-                destinationViewController.sentData = (responseData as! JSON)
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "loginProfileSegue" {
+//            if let destinationViewController = segue.destination as? ProfileViewController {
+//                destinationViewController.sentData = (responseData as! JSON)
+//            }
+//        }
+//    }
     
     /// A constant to layout the textFields.
     fileprivate let constant: CGFloat = 32
