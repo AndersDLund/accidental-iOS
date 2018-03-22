@@ -49,11 +49,11 @@ class LoginViewController: UIViewController, StatusController {
 //    }
     
     /// Handle the resign responder button.
-    @objc
-    internal func handleResignResponderButton(button: UIButton) {
-        emailField?.resignFirstResponder()
-        passwordField?.resignFirstResponder()
-    }
+//    @objc
+//    internal func handleResignResponderButton(button: UIButton) {
+//        emailField?.resignFirstResponder()
+//        passwordField?.resignFirstResponder()
+//    }
     
     /// Button Actions
     
@@ -69,6 +69,7 @@ class LoginViewController: UIViewController, StatusController {
                     case .success:
                         print("Validated")
                         self.responseData = JSON(parseJSON: response.result.value!)
+                        
                         if let jsonData = self.responseData {
                             let userId = jsonData["id"].intValue
                             let userEmail = jsonData["email"].stringValue

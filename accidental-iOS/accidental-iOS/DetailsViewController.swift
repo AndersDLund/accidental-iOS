@@ -73,6 +73,13 @@ class DetailsViewController: UIViewController, StatusController {
         Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageGet/\(car!.car_id)", method: .get, encoding: JSONEncoding.default).responseSwiftyJSON
             {response in
                 print(response, "response from details!!!!!")
+                
+                 self.scratchCount = 0 //1
+                 self.dentCount = 0 //2
+                 self.chipCount = 0 //3
+                 self.curbCount = 0 //4
+                
+                
                 switch response.result{
                 case .success:
                     print("you got DAMAGE!")

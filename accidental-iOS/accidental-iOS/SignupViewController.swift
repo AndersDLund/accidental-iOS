@@ -13,6 +13,8 @@ import SwiftyJSON
 import Alamofire
 
 class SignupViewController: UIViewController  {
+    var responseData : JSON?
+    
     fileprivate var emailField: ErrorTextField!
     fileprivate var passwordField: TextField!
     fileprivate var nameField: TextField!
@@ -36,47 +38,50 @@ class SignupViewController: UIViewController  {
     
     
     /// Handle the resign responder button.
-    @objc
-    internal func handleResignResponderButton(button: UIButton) {
-        emailField?.resignFirstResponder()
-        passwordField?.resignFirstResponder()
-        nameField?.resignFirstResponder()
-        organizationField?.resignFirstResponder()
-
-    }
+//    @objc
+//    internal func handleResignResponderButton(button: UIButton) {
+//        emailField?.resignFirstResponder()
+//        passwordField?.resignFirstResponder()
+//        nameField?.resignFirstResponder()
+//        organizationField?.resignFirstResponder()
+//
+//    }
     
     /// Button Actions
     
     @IBAction func signupButtonPressed(sender: RaisedButton) {
         if emailField.text!.count > 5 && passwordField.text!.count > 8 && nameField.text!.count > 0{
+            
             let params = ["full_name": nameField.text, "email": emailField.text, "organization": organizationField.text, "password": passwordField.text]
             
             Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/signup", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                 {response in
-                    print(response)
+                    print(response.result.value!)
                     switch response.result {
                     case .success:
                         print("nice")
-                        self.navigationController?.dismiss(animated: true, completion: nil)
+                        
+                         self.responseData = JSON(parseJSON: response.result.value!)
+                        print(self.responseData![0], "responseeeeeeeeeee")
+                            if let jsonData = self.responseData?[0] {
+                                print(jsonData, "jsondata");
+                                let userId = jsonData["id"].intValue
+                                let userEmail = jsonData["email"].stringValue
+                                print(userEmail)
+                                let fullName = jsonData["full_name"].stringValue ?? "User"
+                                let userOrg = jsonData["organization"].stringValue ?? fullName
+                                let user = User(id: userId, email: userEmail, fullName: fullName, organization: userOrg)
+                                UserManager.manager.currentUser = user
+                                self.navigationController?.dismiss(animated: true, completion: nil)
+                        }
+            
+                        
                     case .failure:
                         print("boo")
                     }
-                    
-                    
-                    
-                    
-                    // Take response and pass data to user object.
-                    // For now, just set UserDefaults.
-                    
-                    
 
-//                    self.navigationController?.dismiss(animated: true, completion: nil)
+                    
             }
-        } else {
-        let controller = UIAlertController(title: "Hold Up", message: "Please fill out the required infromation", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Thank you!", style: .default, handler: nil)
-        controller.addAction(action)
-        self.present(controller, animated: true, completion: nil)
         }
     }
 }
@@ -101,7 +106,7 @@ extension SignupViewController {
     fileprivate func prepareEmailField() {
         emailField = ErrorTextField()
         emailField.placeholder = "Email"
-        nameField.detail = "Error, incorrect email"
+        emailField.detail = "Error, incorrect email"
         emailField.isClearIconButtonEnabled = true
         emailField.delegate = self
         emailField.isPlaceholderUppercasedWhenEditing = true

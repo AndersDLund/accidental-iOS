@@ -98,6 +98,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         let action = UIAlertAction(title: "Got it!", style: .default, handler: nil)
                         controller.addAction(action)
                         self.present(controller, animated: true, completion: nil)
+                        self.hideStatus()
                     }
             }
         }
