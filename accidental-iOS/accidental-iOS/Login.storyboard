@@ -61,13 +61,32 @@
                                     <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IB1-Jy-WWh"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOd-bJ-H9t" customClass="TOMSMorphingLabel">
+                                <rect key="frame" x="40" y="293" width="295" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="M5R-ul-ems"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Welcome to Accidental">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="0.4637437209810239" blue="0.7875950000617552" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="18" name=".AppleSystemUIFont"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="clipping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9Ri-E7-gfW" firstAttribute="centerY" secondItem="2EZ-8U-CVm" secondAttribute="centerY" id="6O8-gU-bza"/>
                             <constraint firstItem="2EZ-8U-CVm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="7ed-lg-6Os"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9Ri-E7-gfW" secondAttribute="trailing" constant="16" id="8rz-38-aXI"/>
+                            <constraint firstItem="nOd-bJ-H9t" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Fn9-nw-aCZ"/>
+                            <constraint firstItem="nOd-bJ-H9t" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="229" id="FxS-sX-EMK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2EZ-8U-CVm" secondAttribute="bottom" constant="20" id="H38-CS-6hI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nOd-bJ-H9t" secondAttribute="trailing" constant="40" id="Ycz-9d-SA2"/>
                             <constraint firstItem="9Ri-E7-gfW" firstAttribute="height" secondItem="2EZ-8U-CVm" secondAttribute="height" id="ay6-ku-WBI"/>
                             <constraint firstItem="9Ri-E7-gfW" firstAttribute="width" secondItem="2EZ-8U-CVm" secondAttribute="width" id="htA-6g-zJt"/>
                             <constraint firstItem="9Ri-E7-gfW" firstAttribute="leading" secondItem="2EZ-8U-CVm" secondAttribute="trailing" constant="8" id="oIw-Jr-K7z"/>
@@ -76,6 +95,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="GGb-YD-ayl"/>
                     <connections>
+                        <outlet property="mainLabel" destination="nOd-bJ-H9t" id="xcm-ir-beu"/>
                         <segue destination="K2c-KN-Rwe" kind="show" identifier="signupSegue" id="am3-zk-KNw"/>
                         <segue destination="wIc-d7-Ih2" kind="show" identifier="loginSegue" id="vuJ-HY-qWr"/>
                     </connections>

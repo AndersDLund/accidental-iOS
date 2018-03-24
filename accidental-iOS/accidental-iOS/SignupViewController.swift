@@ -11,6 +11,7 @@ import Material
 import Motion
 import SwiftyJSON
 import Alamofire
+import PKHUD
 
 class SignupViewController: UIViewController  {
     var responseData : JSON?
@@ -50,6 +51,7 @@ class SignupViewController: UIViewController  {
     /// Button Actions
     
     @IBAction func signupButtonPressed(sender: RaisedButton) {
+        HUD.show(.progress)
         if emailField.text!.count > 5 && passwordField.text!.count > 8 && nameField.text!.count > 0{
             
             let params = ["full_name": nameField.text, "email": emailField.text, "organization": organizationField.text, "password": passwordField.text]
@@ -61,6 +63,14 @@ class SignupViewController: UIViewController  {
                     case .success:
                         print("nice")
                         
+                        if response.result.value! == "Email already exists"{
+                            HUD.flash(.error, delay: 1.0)
+                            let controller = UIAlertController(title: "Hold Up", message: "That email already exists, proceed to login", preferredStyle: .alert)
+                            let action = UIAlertAction(title: "Got it!", style: .default, handler: nil)
+                            controller.addAction(action)
+                            self.present(controller, animated: true, completion: nil)
+                            
+                        } else if response.result.value! != "Email already exists"{
                          self.responseData = JSON(parseJSON: response.result.value!)
                         print(self.responseData![0], "responseeeeeeeeeee")
                             if let jsonData = self.responseData?[0] {
@@ -73,6 +83,7 @@ class SignupViewController: UIViewController  {
                                 let user = User(id: userId, email: userEmail, fullName: fullName, organization: userOrg)
                                 UserManager.manager.currentUser = user
                                 self.navigationController?.dismiss(animated: true, completion: nil)
+                            }
                         }
             
                         
@@ -82,6 +93,8 @@ class SignupViewController: UIViewController  {
 
                     
             }
+        } else {
+            HUD.flash(.error, delay: 1.0)
         }
     }
 }
@@ -114,7 +127,7 @@ extension SignupViewController {
         
         // Set the colors for the emailField, different from the defaults.
 //                emailField.placeholderNormalColor = Color.amber.darken4
-                emailField.placeholderNormalColor =               Color.pink.base
+//                emailField.placeholderNormalColor =               Color.pink.base
         //        emailField.dividerNormalColor = Color.cyan.base
         //        emailField.dividerActiveColor = Color.green.base
         // Set the text inset
@@ -125,7 +138,7 @@ extension SignupViewController {
     
     fileprivate func prepareOrganizationField() {
         organizationField = TextField()
-        organizationField.placeholder = "Organization"
+        organizationField.placeholder = "Organization (leave blank for personal accounts)"
         organizationField.isClearIconButtonEnabled = true
         organizationField.delegate = self
         organizationField.isPlaceholderUppercasedWhenEditing = true

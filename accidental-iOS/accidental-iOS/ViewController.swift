@@ -11,13 +11,14 @@ import Material
 import Motion
 import SwiftyJSON
 import Alamofire
-import LTMorphingLabel
+import TOMSMorphingLabel
 
 
 
 class ViewController: UIViewController {
     
-    
+    @IBOutlet weak var mainLabel: TOMSMorphingLabel!
+   
     
     @IBAction func signupButton(_ sender: Any) {
         print("signup")
@@ -30,15 +31,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         mainLabel.animationDuration = 8
+//        mainLabel.characterAnimationOffset = 1
+//        mainLabel.characterShrinkFactor = 3
         // Do any additional setup after loading the view, typically from a nib.
         
-  
+        
+         mainLabel.text = "An app for damage recognition"
     }
-    
 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+       
+       
+       
+        mainLabel.text = "Please signup or login to continue"
+        
         
     }
 

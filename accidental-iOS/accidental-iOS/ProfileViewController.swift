@@ -13,9 +13,18 @@ import SwiftyJSON
 import Alamofire
 import Alamofire_SwiftyJSON
 import StatusProvider
+import PKHUD
 
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StatusController {
+      @IBOutlet weak var tableView: UITableView!
+    
+    @IBAction func logoutClicked(_ sender: Any) {
+        UserManager.manager.currentUser = nil
+//        self.reloadInputViews()
+         self.performSegue(withIdentifier: "logoutSegue", sender: sender)
+    
+    }
     
     
     var sentData : JSON?
@@ -26,7 +35,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    @IBOutlet weak var tableView: UITableView!
+  
     
     @IBOutlet weak var navBar: UINavigationItem!
 
@@ -41,10 +50,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         
-        title = "Loading"
-        
-        var status = Status(isLoading: true, description: "Loading…")
-        show(status:status)
         
     }
     
@@ -78,7 +83,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
+        
         if let user = UserManager.manager.currentUser {
             Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/carGet/\(user.id!)", method: .get, encoding: JSONEncoding.default).responseSwiftyJSON
                 {response in
@@ -90,15 +95,17 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                             self.cars.append(car(plate: data[i]["plate"].string!, car_id: data[i]["car_id"].int!, make: data[i]["make"].string!, model: data[i]["model"].string!, image: data[i]["image"].string!, user_id: data[i]["user_id"].int!))
                             print(data[i], "looking for the right id!!!!!!!")
                             self.hideStatus()
+                           HUD.hide(animated: true)
                         }
                         self.tableView.reloadData()
                     case .failure:
                         self.tableView.isHidden = true
-                        let controller = UIAlertController(title: "Welcome to Accidental", message: "please register a car to get started", preferredStyle: .alert)
+                        let controller = UIAlertController(title: "Welcome to Accidental, \(user.fullName!)", message: "please register a car to get started", preferredStyle: .alert)
                         let action = UIAlertAction(title: "Got it!", style: .default, handler: nil)
                         controller.addAction(action)
                         self.present(controller, animated: true, completion: nil)
-                        self.hideStatus()
+                        
+                        HUD.hide(animated: true)
                     }
             }
         }
@@ -107,24 +114,20 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let user = UserManager.manager.currentUser {
-            if user.organization! == ""{
-                self.navBar.title = "Accidental"
-            } else {
                 self.navBar.title = user.organization!
             }
             
             
             
             
-        } else {
+        else {
             // No, a user is not logged in. Present our login flow.
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let viewController = storyboard.instantiateInitialViewController() as! UINavigationController
             self.present(viewController, animated: true, completion: nil)
             }
-        
         }
-    }
+        }
     
 
     /*

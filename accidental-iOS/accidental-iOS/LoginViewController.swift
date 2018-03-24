@@ -12,6 +12,7 @@ import Motion
 import SwiftyJSON
 import Alamofire
 import StatusProvider
+import PKHUD
 
 class LoginViewController: UIViewController, StatusController {
     fileprivate var emailField: ErrorTextField!
@@ -59,14 +60,19 @@ class LoginViewController: UIViewController, StatusController {
     
     @IBAction func loginButtonPressed(sender: RaisedButton) {
         if emailField.text!.count > 5 {
-            
+            HUD.show(.progress)
             let params = ["email": emailField.text, "password": passwordField.text]
             
             Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/login", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                 {response in
                     print(response)
+                    
                     switch response.result {
                     case .success:
+                        if response.result.value! == "no account with that email" || response.result.value! == "incorrect email or password"{
+//                            HUD.hide(animated: true)
+                            HUD.flash(.error, delay: 1.0)
+                        } else{
                         print("Validated")
                         self.responseData = JSON(parseJSON: response.result.value!)
                         
@@ -78,12 +84,13 @@ class LoginViewController: UIViewController, StatusController {
                             let user = User(id: userId, email: userEmail, fullName: fullName, organization: userOrg)
                             UserManager.manager.currentUser = user
                             self.navigationController?.dismiss(animated: true, completion: nil)
+                            }
                         }
                         
                         
                     case .failure(let error):
                         print(error)
-                    }
+                }
             }
         } else {
             let controller = UIAlertController(title: "Hold Up", message: "Please fill out the required infromation", preferredStyle: .alert)
@@ -108,7 +115,7 @@ extension LoginViewController {
         
         // Set the colors for the emailField, different from the defaults.
 //                emailField.placeholderNormalColor = Color.amber.darken4
-                emailField.placeholderNormalColor = Color.pink.base
+//                emailField.placeholderNormalColor = Color.pink.base
         //        emailField.dividerNormalColor = Color.cyan.base
         //        emailField.dividerActiveColor = Color.green.base
         // Set the text inset

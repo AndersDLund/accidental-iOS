@@ -14,51 +14,69 @@ import AVKit
 import Alamofire
 import SwiftyJSON
 import Alamofire_SwiftyJSON
+import AudioToolbox
+import PKHUD
 
 
-class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+
+class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVCapturePhotoCaptureDelegate{
     var damageType = "damage type"
     var representedDamage = "damage type"
     var car:car?
     var user = UserManager.manager.currentUser
+    var stillImageOutput: AVCapturePhotoOutput!
     @IBOutlet weak var recordButton: RaisedButton!
+    
+    let cameraOutput = AVCapturePhotoOutput()
+    
     
     
     @objc func handleGestureLong(press: UILongPressGestureRecognizer) {
-        
+      
         if press.state == .began {
+            
+        print(cameraOutput)
+            
+           AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
           print(damageType, "start")
            representedDamage = damageType
         }
         if press.state == .ended{
             print(representedDamage, "end")
+            print(cameraOutput)
+            
             switch representedDamage {
             case "scratches":
                 let params = ["damage_type_id": 1]
                 Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageNew/\(car!.car_id)", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                     {response in
+                        HUD.flash(.success, delay: 1.0)
                         print(response.result)
                 }
             case "chips":
                 let params = ["damage_type_id": 3]
                 Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageNew/\(car!.car_id)", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                     {response in
+                        HUD.flash(.success, delay: 1.0)
                         print(response.result)
                 }
             case "dents":
                  let params = ["damage_type_id": 2]
                 Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageNew/\(car!.car_id)", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                     {response in
+                        HUD.flash(.success, delay: 1.0)
                         print(response.result)
                 }
             case "curbRash":
                  let params = ["damage_type_id": 4]
                 Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/damageNew/\(car!.car_id)", method: .post, parameters: params, encoding: JSONEncoding.default).responseString
                     {response in
+                        HUD.flash(.success, delay: 1.0)
                         print(response.result)
                 }
             default:
                 print("how did this even happen")
+                HUD.flash(.error, delay: 1.0)
             }
         }
     }
@@ -83,6 +101,7 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        stillImageOutput = AVCapturePhotoOutput()
         print(car!.user_id, "wooooooooooo")
         print(user!.fullName, "current user")
         let longPressGestureRecogn = UILongPressGestureRecognizer(target: self, action: #selector(handleGestureLong(press:)))
@@ -90,6 +109,7 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
         longPressGestureRecogn.minimumPressDuration = 3.0
         recordButton.addGestureRecognizer(longPressGestureRecogn)
         recordButton.addGestureRecognizer(tapPressGestureRecogn)
+     
         
         // here is where we start up the camera
         // for more details visit: https://www.letsbuildthatapp.com/course_video?id=1252
@@ -102,6 +122,11 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
         
         
         captureSession.startRunning()
+       
+        
+    
+
+        
         
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         view.layer.addSublayer(previewLayer)
@@ -126,18 +151,17 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
     }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        //        print("Camera was able to capture a frame:", Date())
+        
         
         guard let pixelBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         
-        // !!!Important
-        // make sure to go download the models at https://developer.apple.com/machine-learning/ scroll to the bottom
+     
         
         //this is where I add my Model!!!
         guard let model = try? VNCoreMLModel(for: damageClassifier().model) else { return }
         let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
         
-            //perhaps check the err
+      
             
 //                        print(finishedReq.results)
             
@@ -166,6 +190,7 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
                         self.damageType = firstObservation.identifier
                     }
             }
+                
         }
             
         }
@@ -174,3 +199,4 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
     }
     
 }
+

@@ -11,6 +11,7 @@ import Alamofire
 import Alamofire_SwiftyJSON
 import Material
 import Motion
+import PKHUD
 
 
 class RegisterViewController: UIViewController, UITextFieldDelegate {
@@ -34,12 +35,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     var currentModel: String = ""
     
     @IBAction func registerCarButton(_ sender: Any) {
+        HUD.show(.progress)
         let params = ["model_id": modelIdDict[selectedModel]!, "plate": plateField.text!] as [String : Any]
         Alamofire.request("https://aqueous-hollows-24814.herokuapp.com/carRegister/\(String(describing: user!.id!))", method: .post, parameters: params, encoding: JSONEncoding.default).responseSwiftyJSON
             {response in
                 switch response.result {
                 case .success:
                     print("nice")
+                    
                 case .failure:
                     print("boo")
                 }
@@ -57,7 +60,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         self.modelPicker.isHidden = true
         print(carMakeArray, "from didload")
+         plateField.isHidden = true
         self.plateField.delegate = self
+       
     }
  
     override func viewWillAppear(_ animated: Bool) {
@@ -129,12 +134,14 @@ extension RegisterViewController: UIPickerViewDelegate {
                 self.carModelArray.removeAll()
                 self.carModelArray.append("Select Model")
                 self.modelPicker.isHidden = false
+                 self.plateField.isHidden = false
             for i in 0..<makeModelDict[currentMake]!.count{
                 self.carModelArray.append(makeModelDict[currentMake]![i])
                 self.modelPicker.reloadAllComponents()
                 }
             } else if selection == "Select Make"{
                 self.modelPicker.isHidden = true
+                 self.plateField.isHidden = true
             }
             
             
