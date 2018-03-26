@@ -69,7 +69,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="Welcome to Accidental">
                                         <attributes>
-                                            <color key="NSColor" red="1" green="0.4637437209810239" blue="0.7875950000617552" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="NSColor" red="1" green="0.55276271876913396" blue="0.95015983437248142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="18" name=".AppleSystemUIFont"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="clipping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
