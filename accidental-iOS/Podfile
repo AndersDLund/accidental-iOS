@@ -16,4 +16,5 @@ pod "TOMSMorphingLabel", "~> 0.5"
 pod "PickerView"
 pod 'PKHUD', '~> 5.0'
 pod 'VerticalSlider'
+pod 'SwiftGifOrigin', '~> 1.6.1'
 end

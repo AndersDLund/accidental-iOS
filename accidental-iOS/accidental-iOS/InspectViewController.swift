@@ -158,7 +158,7 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
      
         
         //this is where I add my Model!!!
-        guard let model = try? VNCoreMLModel(for: damageClassifier().model) else { return }
+        guard let model = try? VNCoreMLModel(for: damageClassifier3().model) else { return }
         let request = VNCoreMLRequest(model: model) { (finishedReq, err) in
         
       
@@ -172,7 +172,7 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
 //            print(firstObservation.identifier, firstObservation.confidence)
             
             DispatchQueue.main.async {
-                if firstObservation.confidence * 100 > 75{
+                if firstObservation.confidence * 100 > 65{
                     if firstObservation.identifier == "dents"{
                         self.identifierLabel.text = "Dent \(floor(firstObservation.confidence * 100))%"
                         self.damageType = firstObservation.identifier
@@ -187,6 +187,14 @@ class InspectViewController: UIViewController, AVCaptureVideoDataOutputSampleBuf
                     }
                     else if firstObservation.identifier == "curbRash"{
                         self.identifierLabel.text = "Curb Rash \(floor(firstObservation.confidence * 100))%"
+                        self.damageType = firstObservation.identifier
+                    }
+                    else if firstObservation.identifier == "noDamage"{
+                        self.identifierLabel.text = "No damage detected"
+                        self.damageType = firstObservation.identifier
+                    }
+                    else if firstObservation.identifier == "largeDamage"{
+                        self.identifierLabel.text = "Significant damage detected"
                         self.damageType = firstObservation.identifier
                     }
             }

@@ -36,7 +36,7 @@ class DetailsViewController: UIViewController, StatusController {
     
     @IBOutlet weak var carImage: UIImageView!
     @IBOutlet weak var carLabel: UILabel!
-   
+
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBOutlet weak var scratchLabel: TOMSMorphingLabel!
@@ -331,7 +331,7 @@ class DetailsViewController: UIViewController, StatusController {
         let url = URL(string: (car?.image)!)
         let data = try? Data(contentsOf: url!)
         print(url!)
-        carLabel.text = "\(car!.make.uppercased()) \(car!.model.uppercased())"
+        carLabel.text = "\(car!.make.uppercased()) \(car!.model.uppercased()) ~ \(car!.plate.uppercased())"
         
         carImage.image = UIImage(data:data!)
         

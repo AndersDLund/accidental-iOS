@@ -5,7 +5,7 @@ url = "dataset/"
 data = turi.image_analysis.load_images(url)
 
 #define the image
-data["damageType"] = data["path"].apply(lambda path: "scratches" if "scratches" in path else "dents" if "dents" in path else "chips" if "chips" in path  else "curbRash")
+data["damageType"] = data["path"].apply(lambda path: "scratches" if "scratches" in path else "dents" if "dents" in path else "chips" if "chips" in path else "noDamage" if "noDamage" in path else "largeDamage" if "largeDamage" in path else "curbRash")
 
 data.save("damage.sframe")
 

@@ -15,9 +15,18 @@ import Alamofire_SwiftyJSON
 import StatusProvider
 import PKHUD
 
+class CarCell: UITableViewCell {
+    
+    @IBOutlet weak var carImageView: UIImageView!
+    
+    @IBOutlet weak var carLabel: UILabel!
+}
+
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StatusController {
       @IBOutlet weak var tableView: UITableView!
+    
+
     
     @IBAction func logoutClicked(_ sender: Any) {
         UserManager.manager.currentUser = nil
@@ -62,14 +71,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let rect = CGRect(origin: CGPoint(x: 12,y :12), size: CGSize(width: 300, height: 100))
         let url = URL(string: cars[indexPath.row].image)
         let data = try? Data(contentsOf: url!)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell")
-        let imageView = UIImageView(frame: rect)
-        let image = UIImage(data:data!)
-        imageView.image = image
-        cell?.textLabel?.text = "\(cars[indexPath.row].model.uppercased()), \(cars[indexPath.row].make.uppercased())"
-        cell?.backgroundView = UIView()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell") as! CarCell
+        cell.carLabel?.textColor = .white
+        cell.carLabel?.text = "\(cars[indexPath.row].model.uppercased()) ~ \(cars[indexPath.row].plate.uppercased())"
+        cell.carImageView.image = UIImage(data:data!)
+     
+
 //        cell?.backgroundView!.addSubview(imageView)
-        return cell!
+        return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showDetailsSegue", sender: self)
@@ -114,7 +123,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let user = UserManager.manager.currentUser {
-                self.navBar.title = user.organization!
+            if user.organization == "" {
+                self.navBar.title = user.fullName!
+            } else {
+                 self.navBar.title = user.fullName!
+            }
+            
             }
             
             

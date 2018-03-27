@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,27 +20,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BYZ-Ma-1jG" customClass="tableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BYZ-Ma-1jG" customClass="tableView">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexColor" red="0.56470588239999997" green="0.81960784310000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="basicCell" textLabel="z2y-dx-kSo" rowHeight="150" style="IBUITableViewCellStyleDefault" id="jmU-jg-w9Q">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="basicCell" rowHeight="150" id="jmU-jg-w9Q" customClass="CarCell" customModule="accidental_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jmU-jg-w9Q" id="EP7-e0-KRG">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z2y-dx-kSo">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="150"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5ai-ea-xYg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6du-TG-Qq4">
+                                                    <rect key="frame" x="15" y="118" width="360" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6du-TG-Qq4" firstAttribute="bottom" secondItem="EP7-e0-KRG" secondAttribute="bottomMargin" id="9tP-QI-6mp"/>
+                                                <constraint firstItem="6du-TG-Qq4" firstAttribute="leading" secondItem="EP7-e0-KRG" secondAttribute="leadingMargin" constant="-1" id="LED-bF-6dZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="5ai-ea-xYg" secondAttribute="trailing" id="QuL-p5-Vq6"/>
+                                                <constraint firstAttribute="bottom" secondItem="5ai-ea-xYg" secondAttribute="bottom" id="gBI-Hb-p8f"/>
+                                                <constraint firstItem="5ai-ea-xYg" firstAttribute="leading" secondItem="EP7-e0-KRG" secondAttribute="leading" id="jbu-hK-dzB"/>
+                                                <constraint firstItem="5ai-ea-xYg" firstAttribute="top" secondItem="EP7-e0-KRG" secondAttribute="top" id="kpQ-7c-cSp"/>
+                                                <constraint firstItem="6du-TG-Qq4" firstAttribute="trailing" secondItem="5ai-ea-xYg" secondAttribute="trailing" id="zEB-aV-gng"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="carImageView" destination="5ai-ea-xYg" id="y9k-ln-kh2"/>
+                                            <outlet property="carLabel" destination="6du-TG-Qq4" id="ZH9-1n-Seb"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -96,7 +112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSV-Nb-7ug" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3238" y="72"/>
+            <point key="canvasLocation" x="3237.5999999999999" y="71.514242878560722"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="uBL-t9-VxQ">
@@ -468,7 +484,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEM-Ur-3V5" customClass="RaisedButton" customModule="Material">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEM-Ur-3V5" customClass="FlatButton" customModule="Material">
                                 <rect key="frame" x="142" y="463" width="91" height="91"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="91" id="6H4-jc-nLR"/>

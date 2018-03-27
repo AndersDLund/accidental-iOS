@@ -14,6 +14,7 @@ PODS:
   - PickerView (0.3.3)
   - PKHUD (5.0.0)
   - StatusProvider (1.2.7)
+  - SwiftGifOrigin (1.6.1)
   - SwiftyJSON (4.0.0)
   - TOMSMorphingLabel (0.5.1)
   - VerticalSlider (1.0.3)
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - PickerView
   - PKHUD (~> 5.0)
   - StatusProvider
+  - SwiftGifOrigin (~> 1.6.1)
   - SwiftyJSON
   - TOMSMorphingLabel (~> 0.5)
   - VerticalSlider
@@ -39,10 +41,11 @@ SPEC CHECKSUMS:
   PickerView: a6703d2f7cb1fafc8a3aef4af255a5acd320ddff
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
   StatusProvider: e75bc9f63b935f5eec6fe49447b8e9ebbc871a87
+  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
   VerticalSlider: 4dacdf1ba587956142e12087f96922166ec2b58d
 
-PODFILE CHECKSUM: b2622bcbbaa7d634b8e00778cf43a8ea170cee11
+PODFILE CHECKSUM: 1f3bb8831f8937b2bd7cc0b73651301b96db7df7
 
 COCOAPODS: 1.4.0

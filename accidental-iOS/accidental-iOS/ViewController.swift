@@ -12,13 +12,16 @@ import Motion
 import SwiftyJSON
 import Alamofire
 import TOMSMorphingLabel
+import SwiftGifOrigin
 
 
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var mainLabel: TOMSMorphingLabel!
-   
+    
+    
+    @IBOutlet weak var gifView: UIImageView!
+    
     
     @IBAction func signupButton(_ sender: Any) {
         print("signup")
@@ -31,13 +34,22 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         mainLabel.animationDuration = 8
+        self.view.sendSubview(toBack: gifView)
+        gifView.loadGif(name: "drivingGif")
+        self.title = "Accidental"
+        
+        
+        
+        
+        
+        
+        
 //        mainLabel.characterAnimationOffset = 1
 //        mainLabel.characterShrinkFactor = 3
         // Do any additional setup after loading the view, typically from a nib.
         
         
-         mainLabel.text = "An app for damage recognition"
+//         mainLabel.text = "An app for damage recognition"
     }
 
     
@@ -47,7 +59,7 @@ class ViewController: UIViewController {
        
        
        
-        mainLabel.text = "Please signup or login to continue"
+//        mainLabel.text = "Please signup or login to continue"
         
         
     }
